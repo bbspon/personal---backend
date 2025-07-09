@@ -3,41 +3,42 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
-const imageRoutes = require('./routes/imageRoutes'); // <-- add this
+const imageRoutes = require('./routes/imageRoutes');
 const videoRoutes = require("./routes/videoRoutes");
 const collaboratorRoutes = require("./routes/collaboratorRoutes");
-const contactRoutes = require("./routes/contactRoutes"); // adjust path if needed
+const contactRoutes = require("./routes/contactRoutes");
 
 const path = require("path");
 
 dotenv.config();
 
 const app = express();
-app.use(cors()); // <-- THIS LINE IS CRUCIAL
+app.use(cors());
 app.use(express.json());
 
-
+// ✅ MongoDB Atlas Connection using .env
 mongoose
-  .connect("mongodb://127.0.0.1:27017/bbsCMS", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("✅ MongoDB connected!"))
+  .then(() => console.log("✅ MongoDB Atlas connected!"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
-app.use("/api/auth", authRoutes);
-// Serve static files (uploaded images)
+
+// Static file handling
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/videos", express.static(path.join(__dirname, "videos")));
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use('/api/images', imageRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/collaborators", collaboratorRoutes);
 app.use("/api/contact", contactRoutes);
-console.log("✅ contactRoutes loaded");
 
+console.log("✅ contactRoutes loaded");
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
