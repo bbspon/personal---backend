@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { submitInterest } = require("../controllers/businessInterestController");
 
-router.post("/api/business-interest", submitInterest);
+router.post("/", submitInterest);
 router.get("/", (req, res) => {
   res.send("Business Interest API is working");
 });

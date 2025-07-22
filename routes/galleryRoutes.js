@@ -7,11 +7,11 @@ const videoController = require("../controllers/videoController");
 
 // Image routes
 router.post(
-  "/api/upload-image",
+  "/upload-image",
   upload.single("file"),
   imageController.uploadImage
 );
-router.get("/api/images", imageController.getImages);
+router.get("/images", imageController.getImages);
 
 // Video routes
 router.post(
