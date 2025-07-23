@@ -2,7 +2,7 @@
 node_modules/
 
 # Env files
-
+.env
 
 # Log files
 logs
@@ -10,7 +10,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+package-lock.json
 # Uploaded files
 uploads/
 
