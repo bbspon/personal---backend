@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const path = require('path');
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const imageRoutes = require('./routes/imageRoutes');
@@ -117,6 +118,11 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
+// Serve frontend build (React/Vite)
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('*', (req, res) => {
+res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📍 Visit http://localhost:${PORT} to see the API status`);
