@@ -33,24 +33,24 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/videos", express.static(path.join(__dirname, "videos")));
 
 // Root route - API status
-// app.get('/', (req, res) => {
-//   res.json({
-//     message: 'Backend API is running successfully! 🚀',
-//     status: 'online',
-//     timestamp: new Date().toISOString(),
-//     availableRoutes: [
-//       '/api/auth',
-//       '/api/images',
-//       '/api/videos',
-//       '/api/collaborators',
-//       '/api/contact',
-//       '/api/appointments',
-//       '/api/admin',
-//       '/api/business-interest',
-//       '/api/gallery'
-//     ]
-//   });
-// });
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Backend API is running successfully! 🚀',
+    status: 'online',
+    timestamp: new Date().toISOString(),
+    availableRoutes: [
+      '/api/auth',
+      '/api/images',
+      '/api/videos',
+      '/api/collaborators',
+      '/api/contact',
+      '/api/appointments',
+      '/api/admin',
+      '/api/business-interest',
+      '/api/gallery'
+    ]
+  });
+});
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -67,44 +67,44 @@ app.use("/api/contact", contactRoutes);
 console.log("✅ contactRoutes loaded");
 
 // Root route for API status
-// app.get('/', (req, res) => {
-//   res.json({
-//     message: "Backend API is running successfully! 🚀",
-//     status: "online",
-//     timestamp: new Date().toISOString(),
-//     availableRoutes: [
-//       "/api/auth",
-//       "/api/images",
-//       "/api/videos",
-//       "/api/collaborators",
-//       "/api/contact",
-//       "/api/appointments",
-//       "/api/admin",
-//       "/api/business-interest",
-//       "/api/gallery"
-//     ]
-//   });
-// });
+app.get('/', (req, res) => {
+  res.json({
+    message: "Backend API is running successfully! 🚀",
+    status: "online",
+    timestamp: new Date().toISOString(),
+    availableRoutes: [
+      "/api/auth",
+      "/api/images",
+      "/api/videos",
+      "/api/collaborators",
+      "/api/contact",
+      "/api/appointments",
+      "/api/admin",
+      "/api/business-interest",
+      "/api/gallery"
+    ]
+  });
+});
 
 // Handle 404 errors
-// app.use('*', (req, res) => {
-//   res.status(404).json({
-//     error: 'Route not found',
-//     message: `The requested route ${req.originalUrl} does not exist`,
-//     availableRoutes: [
-//       '/',
-//       '/api/auth',
-//       '/api/images',
-//       '/api/videos',
-//       '/api/collaborators',
-//       '/api/contact',
-//       '/api/appointments',
-//       '/api/admin',
-//       '/api/business-interest',
-//       '/api/gallery'
-//     ]
-//   });
-// });
+app.use('*', (req, res) => {
+  res.status(404).json({
+    error: 'Route not found',
+    message: `The requested route ${req.originalUrl} does not exist`,
+    availableRoutes: [
+      '/',
+      '/api/auth',
+      '/api/images',
+      '/api/videos',
+      '/api/collaborators',
+      '/api/contact',
+      '/api/appointments',
+      '/api/admin',
+      '/api/business-interest',
+      '/api/gallery'
+    ]
+  });
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
