@@ -24,6 +24,8 @@ exports.submitContact = async (req, res) => {
 
     await contact.save(); // 💾 Save to DB
 // Send Email to Admin
+console.log("[BOOT] EMAIL_USER:", process.env.EMAIL_USER ? "(set)" : "(missing)");
+
 const transporter = nodemailer.createTransport({
 host: "smtp.zoho.in", // :check: Zoho Mail SMTP
 port: 465, // :check: SSL port (secure)
