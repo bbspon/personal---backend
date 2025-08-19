@@ -6,6 +6,8 @@ const { submitContact } = require("../controllers/contactController");
 const storage = multer.memoryStorage(); // You can change this to diskStorage
 const upload = multer({ storage });
 
+
+
 router.post("/", upload.single("file"), (req, res, next) => {
   console.log("📨 Route hit! Passing to controller...");
   console.log("✅ Form Data Received:", req.body);
@@ -14,3 +16,5 @@ router.post("/", upload.single("file"), (req, res, next) => {
 }, submitContact);
 
 module.exports = router;
+
+

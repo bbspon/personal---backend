@@ -10,12 +10,13 @@ exports.submitContact = async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
     const file = req.file;
-
+    const attachment = req.file?.filename || null;
     const contact = new Contact({
       name,
       email,
       phone,
       subject,
+       attachment,
       message,
       fileName: file?.originalname || null,
       fileBuffer: file?.buffer || null,
