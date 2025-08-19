@@ -8,16 +8,28 @@ const imageRoutes = require('./routes/imageRoutes');
 const videoRoutes = require("./routes/videoRoutes");
 const collaboratorRoutes = require("./routes/collaboratorRoutes");
 const contactRoutes = require("./routes/contactRoutes");
-const appointmentRoutes = require("./routes/appointmentRoutes");
-const adminRoutes = require("./routes/adminRoutes");
-const businessInterestRoutes = require("./routes/businessInterestRoute");
-const galleryRoutes = require("./routes/galleryRoutes");
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173",   // local
+  "http://10.122.0.2:3000", // your server IP + port
+  "https://balabharath.com"   // your production domain if mapped
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 
 // ✅ MongoDB Atlas Connection using .env
 mongoose
